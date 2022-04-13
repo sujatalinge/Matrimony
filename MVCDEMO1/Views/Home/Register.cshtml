@@ -1,0 +1,69 @@
+﻿@model MVCDEMO1.Models.Register
+
+@{
+    Layout = null;
+}
+@using MVCDEMO1.Utility;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+    <h2>Register</h2>
+
+
+    @*<form action="home/register" method="post">*@
+
+    @using (Html.BeginForm("register","home",FormMethod.Post)) { 
+
+        <div>
+
+            <table>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Email)
+                        @Html.ValidationMessageFor(model =>model.Email)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Password)
+                        @Html.ValidationMessageFor(model => model.Password)
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayNameFor(model => model.ConfirmPassword)
+                       @*<label>Confirm Password</label>*@
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.ConfirmPassword)
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        @Html.Button("btnRegister", "submit", "Register")
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+    }
+  @* </form>*@
+</body>
+</html>

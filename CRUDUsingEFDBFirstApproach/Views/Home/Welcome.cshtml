@@ -1,0 +1,29 @@
+﻿@*@@model int*@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Welcome</title>
+</head>
+<body>
+    <div>
+        @{
+            Html.RenderPartial("MyPartialview1");
+        }
+
+        @Html.Partial("MyPartialview1")
+
+        <h2>
+            Welcome view
+        </h2>
+        <p>@ViewBag.Id</p>
+        <p>@ViewBag.Name</p>
+    </div>
+</body>
+</html>

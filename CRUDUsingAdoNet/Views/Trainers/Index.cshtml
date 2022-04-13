@@ -1,0 +1,41 @@
+﻿@*@model CRUDUsingAdoNet.Models.Trainer*@
+@model IEnumerable<CRUDUsingAdoNet.Models.Trainer>
+@using CRUDUsingAdoNet.Models;
+
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @Html.ActionLink("Create Trainer","Create")
+        <h2>List of Trainers</h2>
+        @*  @Model= IEnumerable<Trainer>*@
+
+        <ul>
+            @foreach (Trainer t in Model)
+            {
+            <li>
+                @Html.ActionLink(t.name, "GetStudentByTrainerId",
+               new { trainerid = t.Id, trainername = t.name })  |
+                @Html.ActionLink("details", "Details", new { trainerId = t.Id }) |
+
+
+                @Html.ActionLink("modify", "Edit", new { trainerId = t.Id })  |
+                @Html.ActionLink("delete", "Delete", new { trainerId = t.Id })
+
+            </li>
+            }
+</ul>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,105 @@
+﻿
+
+@using MVCDEMO1.Utility;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        @*<h1>@ViewBag.Name.ToUpper()</h1>
+            <h2>@ViewBag.Action</h2>*@
+
+        @*   <h1>
+            @((string)ViewData["name"]).ToUpper()
+            </h1>*@
+
+        @*<p>Welcome, @TempData["username"]. logged in as @TempData["usertype"] </p>*@
+
+        <h1>
+            @{
+                string name = (string)ViewData["name"];
+            }
+            @name
+
+        </h1>
+        <h2>@ViewData["action"]</h2>
+        <form action="home/login" method="post">
+            <table>
+
+                <tr>
+                    <td>Email</td>
+                    @*<td><input type="text" id="email" name="email" />*@
+                    <td>
+                        @Html.TextBox("email")
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    @*<td><input type="password"  id="password" name="password"/>*@
+                    <td>
+                        @Html.Password("password")
+                    </td>
+                </tr>
+                <tr>
+                    <td>Remember Me</td>
+                    <td>
+                        @Html.CheckBox("rememberme", true)
+                    </td>
+
+                    @*  <td><input type="checkbox" /></td>*@
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>
+                        @Html.TextArea("address")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @* <input type="submit" value="Log In"/>*@
+
+                        @Html.Button("btnsubmit", "submit", "Log In")
+
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+    <h2>ALll Students</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>RollNumber</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var student in ViewBag.Students)
+            {
+                <tr>
+                    <td>
+                        @student.RollNumber
+                    </td>
+                    <td>
+                        @student.Name
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+   @* <img src="~/Images/Shlok.jpg" alt="My company logo"
+         width="25%" height="10%" />*@
+
+       @Html.Image("Images/Shlok.jpg", "My company logo")
+
+
+</body>
+</html>

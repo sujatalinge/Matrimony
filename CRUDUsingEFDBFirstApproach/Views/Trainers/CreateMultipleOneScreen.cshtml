@@ -1,0 +1,137 @@
+﻿@model IEnumerable<CRUDUsingEFDBFirstApproach.Models.Trainer>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateMultipleOneScreen</title>
+
+    <script>
+
+
+     $(function () {
+
+         ('#btnAddTrainer').click(function () {
+
+             $.ajax({
+                 url: 'CreateTrainerView',
+                 type: 'get',
+                 success: function (response) {
+                     $('#trainerDiv').append(response);
+                 },
+                 error: function () {
+                     alert('failed');
+                 }
+             });
+
+         });
+         //        $('#trainerDiv').on('load', "#btnAddTrainer", function () {
+                //
+
+                //          var names = $('input[name="Name"]');
+                //        var salaries = $('input[name="Salary"]');
+
+                //         var trainers = [];
+                //        for (var i = 0; i < names.length; i++) {
+                //            var t = { Name: names[i], Salary: salaries[i] };
+                //           trainers.push(t);
+
+                //     }
+                //     $.ajax({
+                //        url: 'CreateTrainerView',
+                //       type: 'get',
+                //     data: JSON.stringify(trainers),
+                //     success: function (response) {
+                //     $('#trainerDiv').append(response);
+
+
+                //   $('#trainerDiv').after(response);
+                //   alert(response);
+                //  },
+                //error: function () {
+                //   alert('failed');
+                //   }
+                //});
+                //
+                //});
+                //});
+
+                //  $('#btnCreateTrainers').click()
+                $("#trainerDiv").on("click", "#btnCreateTrainers", function () {
+
+                    //var name = $('input[name="Name"]').val();
+                    //alert(name);
+                  //   var Salary = $('input[name="Salary"]').val();
+                    // alert(name + ' ' + salary);
+
+                    var names = new Array();
+                    $('input[name="Name"]').each(function(){
+                        names.push($(this).val());
+                    });
+
+                    var salaries = new Array();
+
+                    $('input[name="Salary"]'.each(function () {
+                        salaries.push($(this).val());
+
+                    });
+
+                    var ts= [];
+                    for (var i = 0; i < names.length; i++) {
+                        var t = { Name: names[i], Salary:salaries[i] };
+                        ts.push(t);
+                    }
+                    console.log('number of trainers:'+ts.length);
+
+                    $.ajax({
+                        url: 'CreateMultipleOneScreen',
+                        type: 'post',
+                         contentType: 'application/json',
+                        accepts: 'application/json',
+                        datatype: "json",
+                    data: JSON.stringify(ts),
+                        sucess: function (response) { alert('success'); },
+                        
+                        error: function (reason) { alert('failed'); }
+                        
+
+                        
+                    });
+                });
+            });
+    </script>
+</head>
+<body>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+    <div class="container" id="trainerDiv">
+
+        <input type="button" value="Create Trainers To DB" id="btnCreateTrainers"
+               class="btn btn-success" />
+ </div>
+
+      @*<input type="submit" value="Create Trainer" class="btn btn-sucess" />*@
+
+    }
+    <input type="button" value="Add a Trainer" id="btnAddTrainer" class="btn btn-primary" />
+
+</body>
+</html>
+@* @Html.Partial("_CreateTrainerView")
+
+    @Html.Partial("_CreateTrainerView")*@
+
+
+@section links
+{
+
+}
+
+@section advertisements
+ {
+
+}

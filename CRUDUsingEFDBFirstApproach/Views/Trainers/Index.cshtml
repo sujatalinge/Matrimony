@@ -1,0 +1,170 @@
+﻿@*@model IEnumerable<CRUDUsingEFDBFirstApproach.Models.Trainer>*@
+@model IPagedList<CRUDUsingEFDBFirstApproach.Models.Trainer>
+
+
+
+@using PagedList;
+@using PagedList.Mvc;
+
+
+@{ // Layout = "~/Views/_Layout.cshtml";
+}
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script>
+        $(function () {
+
+         //   alert('Welcome,Guest');
+
+            $("#checkAllTrainer").click(function () {
+             //   alert('you checked all options');
+             //   $('input[ name="checkTrainer"]').hide();
+
+                if ($(this).prop('checked') == true) {
+                    $('input[ name="checkTrainer"]').attr('checked', true);
+                }
+                else {
+                    $('input[ name="checkTrainer"]').attr('checked', false);
+
+                }
+                
+            });
+
+            $('input[name=checkTrainer]').click(function () {
+               // alert('hello');
+                var totalCount = $('input[name=checkTrainer]').length;
+
+                var selectedCount = $('input[name=checkTrainer]:checked').length;
+                if (totalCount == selectedCount) {
+                    $("#checkAllTrainer").prop('checked', true);
+                }
+                else {
+                    $("#checkAllTrainer").prop('checked', false);
+
+                }
+                
+
+            });
+            $('#btnMultipleDelete').click(function () {
+
+                var selectedCount = $('input[name=checkTrainer]:checked').length;
+                if (selectedCount == 0) {
+                    alert('please select trainer to delete');
+                    return false;
+                }
+                else {
+                    return confirm('Are you sure you want to delete trainers?');
+                }
+
+               //onclick = "return frontEndValidation()
+            });
+
+
+        });
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        @*<p>
+                @Html.ActionLink("Create New", "Create")
+            </p>*@
+        <h2>All Trainers</h2>
+
+        @* <input type="text" id="search" name="search"/>
+            <input type="submit" value="search"/>*@
+
+        @using (Html.BeginForm("Index", "Trainers", FormMethod.Get))
+
+        {
+            <input type="text" id="search" name="search" />
+            <input type="submit" value="search" />
+
+        }
+
+
+        @using (Html.BeginForm("DeleteMultiple","Trainers", FormMethod.Post))
+        { 
+        <table class="table">
+            <tr>
+                <th>
+                    <input type="checkbox" id="checkAllTrainer"
+                           name="checkAllTrainer"/>  All
+                </th>
+                <th>
+                   @* @Html.DisplayNameFor(model => model.FirstOrDefault().Name)*@
+                    @Html.ActionLink("Name", "Index",
+                         new{ search = Request["search"],page = Request["page"],
+                             sortBy = ViewBag.NameSort
+                         })
+                </th>
+                <th>
+                   @* @Html.DisplayNameFor(model => model.FirstOrDefault().Salary)*@
+                    @Html.ActionLink("Salary", "Index",
+                        new{ search = Request["search"], page = Request["page"],
+                            sortBy = ViewBag.SalarySort
+                        })
+                </th>
+                <th>Actions</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" id="checkTrainer"
+                               name="checkTrainer" value="@item.Id" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Salary)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+
+            }
+
+           
+
+        </table>
+
+
+        <input type="submit" value="Delete Multiple" id="btnMultipleDelete"
+               class="btn btn-danger" />
+        }
+    </div>
+
+    <div style="float:right">
+        
+        @Html.PagedListPager(Model, page =>
+        Url.Action("Index", new { page = page,
+            search = Request.QueryString["search"] ,
+            sortBy = ViewBag.SortBy
+        }),
+         new PagedListRenderOptions() {
+             DisplayItemSliceAndTotal=true
+
+         })
+
+    </div>
+</body>
+</html>

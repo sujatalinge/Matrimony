@@ -1,0 +1,58 @@
+﻿@model CRUDUsingEFDBFirstApproach.Models.Trainer
+
+@{
+  //  Layout = "~/Views/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+
+        <div>
+            <h4>Trainer</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Salary)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Salary)
+                </dd>
+
+            </dl>
+        </div>
+        @*<p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>*@
+    </div>
+</body>
+</html>
+
+@section links
+     {
+    <p>@Html.ActionLink("Trainers List", "Index") </p>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    </p>
+}

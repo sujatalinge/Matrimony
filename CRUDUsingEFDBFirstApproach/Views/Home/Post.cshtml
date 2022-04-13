@@ -1,0 +1,19 @@
+﻿
+
+<div class="container"/>
+   <div>
+        @using (Html.BeginForm())
+            {
+                @Html.TextArea("post", new { cols= 100, rows=5 })
+            <br/>
+            <input type="submit" value="Post" class="btn btn-info"/>
+            }
+
+        @if(ViewBag.Post != null)
+            {
+            <h3>Posted Comment:</h3>
+                <div>
+                    @ViewBag.Post
+                </div>
+            }
+    </div>

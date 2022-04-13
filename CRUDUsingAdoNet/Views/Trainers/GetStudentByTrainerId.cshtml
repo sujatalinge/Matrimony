@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CRUDUsingAdoNet.Models.Student>
+
+    @using CRUDUsingAdoNet.Models; 
+
+    @{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>GetStudentByTrainerId</title>
+    </head>
+    <body>
+        <div>
+            <h2>All Students For @ViewBag.TrainerName</h2>
+            <table border="1">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    <tr>
+                        <th>RollNumber</th>
+                        <th>Name</th>
+                    </tr>
+
+                    foreach (Student s in Model)
+                    {
+                        <tr>
+                            <td>
+                               @* @Html.ActionLink(s.Rollnumber.ToString(),"Details","Students")*@
+
+                               @* @Html.ActionLink(student.Rollnumber, "Details",
+                               "Students",null,new { rollNumber=student.Rollnumber })*@
+                                            
+
+
+                               @Html.ActionLink(s.Rollnumber.ToString(),
+                               "Details", "Students", 
+                               new { rollNumber= s.Rollnumber },null)
+                            </td>
+                            <td> @s.name</td>
+                        </tr>
+
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>No students</td>
+                    </tr>
+}
+            </table>
+            
+
+            @Html.ActionLink("Back", "Index")
+        </div>
+    </body>
+</html>

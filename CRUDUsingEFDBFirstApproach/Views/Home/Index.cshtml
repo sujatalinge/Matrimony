@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        @Html.Action("TrainersList");
+      
+           @{
+               Html.RenderPartial("MyPartialview1", "Hello From main view");
+           }
+           
+         @Html.Partial("MyPartialview1", "Hello From main view")
+
+        @Html.Action("MyPartialview1")
+         
+        @{ 
+            Html.RenderAction("MyPartialview1");
+        }
+          
+        <h2>
+            Index View
+        </h2>
+        @Html.ActionLink("method1", "Method1")   |
+
+        @Html.ActionLink("method2", "Method2")   |
+
+        @Html.ActionLink("method3", "Method3")   |
+        @Html.ActionLink("method4", "Method4")   |
+
+
+        @Html.ActionLink("Welcome", "Welcome", new { id = 100 }) |
+        @Html.ActionLink("hello", "Hello")
+
+    </div>
+</body>
+</html>

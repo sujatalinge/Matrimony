@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="container">
+        @Html.ActionLink("Create new", "Create", "Roles");
+        
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    RoleId
+                </th>
+                <th>
+                    Role Name
+                </th>
+            </tr>
+            @if (Model != null && Model.Count() > 0)
+            {
+             @foreach (var item in Model)
+             {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                </tr>
+             }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="2">No Roles in DB</td>
+                </tr>
+            }
+        </table>
+
+    </div>
+</body>
+</html>

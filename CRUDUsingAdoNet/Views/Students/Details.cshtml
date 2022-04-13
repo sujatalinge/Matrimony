@@ -1,0 +1,65 @@
+﻿@model CRUDUsingAdoNet.Models.Student
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div> 
+        <h2>Student Details</h2>
+        <table border="1">
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Rollnumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Rollnumber)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.name)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Gender)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Trainer.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Trainer.Id)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.Trainer.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Trainer.name)
+                </td>
+            </tr>
+        </table>
+    </div>
+   
+    @Html.ActionLink("Back", "GetStudentByTrainerId",
+    "Trainers", new {  trainerid = Model.Trainer.Id,
+        trainername = Model.Trainer.name },null)
+</body>
+</html>

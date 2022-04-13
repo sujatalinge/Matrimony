@@ -1,0 +1,65 @@
+﻿
+@model IEnumerable<CRUDUsingEFDBFirstApproach.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<div class="container">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+     @Html.Action("AllStudents")
+
+    @Ajax.ActionLink("All Students", "AllStudents",
+    new AjaxOptions()    {
+
+        HttpMethod = "GET",
+        UpdateTargetId = "divStudents",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId= "divLoading",
+        OnBegin = "clearStudents"
+
+    })
+
+
+    @Ajax.ActionLink("First 2 Students", "FirstTwoStudents",
+    new AjaxOptions()  {
+
+        HttpMethod = "GET",
+        UpdateTargetId = "divStudents",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "divLoading",
+        OnBegin = "clearStudents"
+
+
+    })
+
+
+    @Ajax.ActionLink("Last 2 Students", "LastTwoStudents",
+    new AjaxOptions() {
+
+        HttpMethod = "GET",
+        UpdateTargetId = "divStudents",
+        InsertionMode = InsertionMode.Replace ,
+        LoadingElementId = "divLoading",
+        OnBegin= "clearStudents"
+
+    })
+
+    <div id="divLoading" style="display:none;">
+        <img src="~/images/Loading.gif" width="50" height="50" />
+    </div>
+
+    <div id="divStudents"></div>
+
+    <script>
+        function clearStudents() {
+            $('#divStudents').empty();
+        }
+    </script>
+</div>
+
